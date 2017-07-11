@@ -1,0 +1,37 @@
+image: amkor/docker-salesforce:latest
+
+stages:
+  - test
+  - deploy
+
+validate_ci:
+  stage: test
+  script:
+    - echo "APTTUS Feature branch - validate with all tests"
+    - ant validate -Dsfdc.maxPoll=500 -Dsfdc.deployRoot=src -Dsfdc.username=$SF_CI_USERNAME -Dsfdc.password=$SF_CI_PASSWORD -Dsfdc.serverurl=$SF_TEST_SERVERURL
+  only:
+    - /^feature\/.*$/
+
+deploy_ci:
+  stage: deploy
+  script:
+    - echo "Deploy code to Dev Integration Env"
+    - ant deploy -Dsfdc.maxPoll=500 -Dsfdc.deployRoot=src -Dsfdc.username=$SF_CI_USERNAME -Dsfdc.password=$SF_CI_PASSWORD -Dsfdc.serverurl=$SF_TEST_SERVERURL
+  only:
+    - develop
+
+validate_preprod:
+  stage: test
+  script:
+    - echo "APTTUS Hotfix branch - validate with all tests"
+    - ant validate -Dsfdc.maxPoll=500 -Dsfdc.deployRoot=src -Dsfdc.username=$SF_PREPROD_USERNAME -Dsfdc.password=$SF_PREPROD_PASSWORD -Dsfdc.serverurl=$SF_TEST_SERVERURL
+  only:
+    - /^hotfix\/.*$/
+
+deploy_preprod:
+  stage: deploy
+  script:
+    - echo "Deploy code to PreProd Environment"
+    - ant deploy -Dsfdc.maxPoll=500 -Dsfdc.deployRoot=src -Dsfdc.username=$SF_PREPROD_USERNAME -Dsfdc.password=$SF_PREPROD_PASSWORD -Dsfdc.serverurl=$SF_TEST_SERVERURL
+  only:
+    - /^release\/.*$/

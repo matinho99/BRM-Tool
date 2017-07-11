@@ -1,0 +1,40 @@
+<project name="License Model Ant tasks" basedir="." xmlns:sf="antlib:com.salesforce">
+    <property file="build-ci.properties"/>
+    <property file="build.properties"/>
+    
+    <target name="deployWithAllTests">
+        <sf:deploy username="${sfdc.username}" password="${sfdc.password}" serverurl="${sfdc.serverurl}" maxPoll="${sfdc.maxPoll}" trace="${sfdc.trace}" logType="${sfdc.logType}" deployRoot="${sfdc.deployRoot}" ignoreWarnings="false" testlevel="RunLocalTests"/>
+    </target>
+
+    <target name="deploy">
+        <sf:deploy username="${sfdc.username}" password="${sfdc.password}" serverurl="${sfdc.serverurl}" maxPoll="${sfdc.maxPoll}" trace="${sfdc.trace}" logType="${sfdc.logType}" deployRoot="${sfdc.deployRoot}" ignoreWarnings="false"/>
+    </target>
+    
+    <target name="validateWithAllTests">
+        <sf:deploy username="${sfdc.username}" password="${sfdc.password}" serverurl="${sfdc.serverurl}" maxPoll="${sfdc.maxPoll}" trace="${sfdc.trace}" logType="${sfdc.logType}" deployRoot="${sfdc.deployRoot}" rollbackOnError="true" checkOnly="true" ignoreWarnings="true" testlevel="RunLocalTests"/>
+    </target>
+    
+    <target name="validate">
+        <sf:deploy username="${sfdc.username}" password="${sfdc.password}" serverurl="${sfdc.serverurl}" maxPoll="${sfdc.maxPoll}" trace="${sfdc.trace}" logType="${sfdc.logType}" deployRoot="${sfdc.deployRoot}" rollbackOnError="true" checkOnly="true" ignoreWarnings="true"/>
+    </target>
+
+    <target name="retrieveAllInPlace">
+        <sf:retrieve username="${sfdc.username}" password="${sfdc.password}" serverurl="${sfdc.serverurl}" maxPoll="${sfdc.maxPoll}" trace="${sfdc.trace}" logType="${sfdc.logType}" retrieveTarget="${sfdc.deployRoot}" unpackaged="${sfdc.deployRoot}/package.xml" ignoreWarnings="false"/>
+    </target>
+
+    <target name="undeploy">
+        <sf:deploy username="${sfdc.username}" password="${sfdc.password}" serverurl="${sfdc.serverurl}" maxPoll="${sfdc.maxPoll}" trace="${sfdc.trace}" logType="${sfdc.logType}" deployRoot="${sfdc.destructiveRoot}" ignoreWarnings="false"/>
+    </target>
+    
+    <target name="deployWithSpecificTests">
+        <sf:deploy username="${sfdc.username}" password="${sfdc.password}" serverurl="${sfdc.serverurl}" maxPoll="${sfdc.maxPoll}" trace="${sfdc.trace}" logType="${sfdc.logType}" deployRoot="${sfdc.destructiveRoot}" ignoreWarnings="false" testLevel="RunSpecifiedTests">
+            <runTest></runTest>
+        </sf:deploy>
+    </target>
+    
+    <target name="validateWithSpecificTests">
+        <sf:deploy username="${sfdc.username}" password="${sfdc.password}" serverurl="${sfdc.serverurl}" maxPoll="${sfdc.maxPoll}" trace="${sfdc.trace}" logType="${sfdc.logType}" deployRoot="${sfdc.destructiveRoot}" rollbackOnError="true" checkOnly="true" ignoreWarnings="false" testLevel="RunSpecifiedTests">
+            <runTest></runTest>
+        </sf:deploy>
+    </target>
+</project>
