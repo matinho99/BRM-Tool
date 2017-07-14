@@ -18,7 +18,11 @@
 		<name>Layout</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>Activity__c</members>
+		<members>FamilyMember__c</members>
+		<members>UnrefusableOffer__c</members>
+		<members>MemberActivity__c</members>
+		<members>FamilyEnemy__c</members>
 		<name>CustomTab</name>
 	</types>
     <version>38.0</version>
