@@ -25,5 +25,9 @@
 		<members>FamilyEnemy__c</members>
 		<name>CustomTab</name>
 	</types>
+	<types>
+		<members>AssassinationTrigger</members>
+		<name>ApexTrigger</name>
+	</types>
     <version>38.0</version>
 </Package>
