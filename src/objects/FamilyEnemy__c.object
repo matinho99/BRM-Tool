@@ -45,6 +45,7 @@
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>true</enableReports>
@@ -71,6 +72,14 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>GonnaDie__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Gonna Die</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>LastName__c</fullName>
         <externalId>false</externalId>
         <label>Last Name</label>
@@ -87,6 +96,7 @@
         <columns>FirstName__c</columns>
         <columns>LastName__c</columns>
         <columns>Email__c</columns>
+        <columns>GonnaDie__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -98,4 +108,5 @@
     <pluralLabel>Family Enemies</pluralLabel>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
 </CustomObject>

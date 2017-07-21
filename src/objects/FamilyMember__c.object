@@ -45,6 +45,7 @@
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>true</enableReports>
@@ -64,22 +65,27 @@
                 <value>
                     <fullName>Boss</fullName>
                     <default>false</default>
+                    <label>Boss</label>
                 </value>
                 <value>
                     <fullName>Button</fullName>
                     <default>false</default>
+                    <label>Button</label>
                 </value>
                 <value>
                     <fullName>Caporegime</fullName>
                     <default>false</default>
+                    <label>Caporegime</label>
                 </value>
                 <value>
                     <fullName>Consiglieri</fullName>
                     <default>false</default>
+                    <label>Consiglieri</label>
                 </value>
                 <value>
                     <fullName>Underboss</fullName>
                     <default>false</default>
+                    <label>Underboss</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -122,4 +128,5 @@
     <pluralLabel>Family Members</pluralLabel>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
 </CustomObject>

@@ -46,6 +46,7 @@
     <description>Table of offers that cannot be refused</description>
     <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>true</enableReports>
@@ -103,4 +104,14 @@
     <pluralLabel>Unrefusable Offers</pluralLabel>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>IsEnemyDead</fullName>
+        <active>false</active>
+        <errorConditionFormula>AND(
+  $ObjectType.FamilyEnemy__c.Fields.Id =  FamilyEnemy__c,
+  $ObjectType.FamilyEnemy__c.Fields.GonnaDie__c = true
+)</errorConditionFormula>
+        <errorMessage>This mf is prolly dead already... someone silenced dis punk !</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
 </CustomObject>
