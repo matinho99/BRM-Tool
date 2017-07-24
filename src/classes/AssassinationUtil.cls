@@ -1,31 +1,30 @@
 public with sharing class AssassinationUtil {
     public static void createAssassinationTasks(List<UnrefusableOffer__c> newUnrefusableOffers) {
-        FamilyEnemy__c dead;
         Task tsk;
         List<Task> tasks = new List<Task>();
-        List<FamilyEnemy__c> enemies = [SELECT Name, FirstName__c, LastName__c, Email__c, GonnaDie__c from FamilyEnemy__c];
+        Set<Id> enemyIds = new Set<Id>();
+        Map<Id, FamilyEnemy__c> enemies;
         List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
-        EmailTemplate et = [Select ID, Name from EmailTemplate where Name like 'Corleone Template'];
+        List<EmailTemplate> et = new List<EmailTemplate>([Select ID, DeveloperName from EmailTemplate where DeveloperName like 'CorleoneTemplate']);
     
+        for(UnrefusableOffer__c uo : newUnrefusableOffers) {
+            enemyIds.add(uo.FamilyEnemy__c);
+        }
+        
+        enemies = new Map<Id, FamilyEnemy__c>([SELECT Id, Email__c from FamilyEnemy__c where Id in :enemyIds]);
+        
         for(UnrefusableOffer__c uo : newUnrefusableOffers) {
             Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
             String[] target;
-            dead = null;
-            
-            for(FamilyEnemy__c fe : enemies) {
-                if(fe.ID.equals(uo.FamilyEnemy__c)) {
-                    dead=fe;
-                    dead.GonnaDie__c = true;
-                    break;
-                }
-            }
+            FamilyEnemy__c dead = enemies.get(uo.FamilyEnemy__c);
             
             if(dead==null) {
                 break;
             }
             
+            dead.GonnaDie__c = true;
             target = new String[] { dead.Email__c, AssassinationEmail__c.getInstance('mosowiecki').Email__c };
-            email.setTemplateID(et.ID);
+            email.setTemplateID(et.get(0).ID);
             email.setTargetObjectId(UserInfo.getUserId());
             email.setWhatId(uo.ID);
             email.setSaveAsActivity(false);
@@ -51,6 +50,6 @@ public with sharing class AssassinationUtil {
         }
         
         Messaging.sendEmail(emails);
-        update enemies;
+        update enemies.values();
     }
 }
