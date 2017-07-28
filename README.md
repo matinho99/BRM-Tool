@@ -16,6 +16,11 @@ Business Role Management automates Salesforce User Access to Salesforce Platform
 
 ### Business Role
 
+| Field | Type  | Required | Description  |
+|------|------|---|--------|
+| Name  | Text(80,unique)  | :heavy_check_mark:  | Name of Business Rule |
+
+
 ### Business Role Entry
 
 ### Business Role Assignment
