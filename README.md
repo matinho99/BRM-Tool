@@ -50,6 +50,7 @@ Business Role Management automates Salesforce User Access to Salesforce Platform
 |------|------|---|---|--------|
 | User | Master-Detail(User)  | :heavy_check_mark:  | | |
 | Business Role | Master-Detail(Business Role)  | :heavy_check_mark: | | |
+| Is Manual?  | Checkbox  | | :heavy_check_mark: | Determines if BR was assigned manuall or automatically |
 | Is Active?  | Checkbox  | | :heavy_check_mark: | Determines if BR is active for given user (manuall managed) |
 
 ## Features
