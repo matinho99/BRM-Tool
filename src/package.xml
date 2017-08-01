@@ -15,10 +15,10 @@
 		<name>Layout</name>
 	</types>
 	<types>
-		<members>BusinessRoleExternalIdTrigger</members>
-		<members>BusinessRoleEntryExternalIdTrigger</members>
-		<members>BusinessRoleAssignmentExternalIdTrigger</members>
-		<members>UserBusinessRoleAssignmentExternalIdTrigger</members>
+		<members>BusinessRoleTrigger</members>
+		<members>BusinessRoleEntryTrigger</members>
+		<members>BusinessRoleAssignmentTrigger</members>
+		<members>UserBusinessRoleAssignmentTrigger</members>
 		<name>ApexTrigger</name>
 	</types>
 	<types>

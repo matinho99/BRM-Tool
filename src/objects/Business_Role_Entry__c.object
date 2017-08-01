@@ -179,7 +179,7 @@
     </fields>
     <label>Business Role Entry</label>
     <nameField>
-        <label>Business Role Entry Name</label>
+        <label>Name</label>
         <type>Text</type>
     </nameField>
     <pluralLabel>Business Role Entries</pluralLabel>
