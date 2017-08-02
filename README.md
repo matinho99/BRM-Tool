@@ -36,7 +36,7 @@ Business Role Management automates Salesforce User Access to Salesforce Platform
 | Operator | Picklist | :heavy_check_mark: | '=' | Values: '=', '*=', '^=', '$=', '>', '>=', '<', '<='|
 | Value | LongTextArea(31k) | | | Entry value |
 
-### Business Role Assignment
+### Business Role Access
 
 | Field | Type  | Required | Default | Description  |
 |------|------|---|---|--------|
@@ -44,7 +44,7 @@ Business Role Management automates Salesforce User Access to Salesforce Platform
 | External Id | Text(255,unique)  | | | Unique External Id (BR Name + '_' + Type + '_' + Name) |
 | Business Role  | Master-Detail(Business Role)  | :heavy_check_mark:  | | |
 | Type | Picklist  | :heavy_check_mark: | PermissionSet | Values: 'PermissionSet', 'Queue', 'Group', 'UserRole', 'Profile' |
-| Is Active?  | Checkbox  | | :heavy_check_mark: | Determines if BR Assignment is active or not |
+| Is Active?  | Checkbox  | | :heavy_check_mark: | Determines if BRA is active or not |
 
 ### User Business Role Assignment (BR and User junction object)
 
