@@ -12,8 +12,8 @@
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Entry_Logic__c</field>
+                <behavior>Edit</behavior>
+                <field>Description__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -22,8 +22,8 @@
                 <field>Is_Active__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Description__c</field>
+                <behavior>Readonly</behavior>
+                <field>Entry_Logic__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -76,7 +76,7 @@
             <fields>NAME</fields>
             <fields>Type__c</fields>
             <fields>Is_Active__c</fields>
-            <relatedList>Business_Role_Assignment__c.Business_Role__c</relatedList>
+            <relatedList>Business_Role_Access__c.Business_Role__c</relatedList>
         </relatedLists>
         <relatedLists>
             <fields>NAME</fields>
@@ -99,7 +99,7 @@
         <fields>NAME</fields>
         <fields>Type__c</fields>
         <fields>Is_Active__c</fields>
-        <relatedList>Business_Role_Assignment__c.Business_Role__c</relatedList>
+        <relatedList>Business_Role_Access__c.Business_Role__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>

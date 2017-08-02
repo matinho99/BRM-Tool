@@ -57,8 +57,8 @@
         <externalId>false</externalId>
         <label>Business Role</label>
         <referenceTo>Business_Role__c</referenceTo>
-        <relationshipLabel>Business Role Assignments</relationshipLabel>
-        <relationshipName>Business_Role_Assignments</relationshipName>
+        <relationshipLabel>Business Role Accesses</relationshipLabel>
+        <relationshipName>Business_Role_Accesses</relationshipName>
         <relationshipOrder>0</relationshipOrder>
         <reparentableMasterDetail>false</reparentableMasterDetail>
         <trackTrending>false</trackTrending>
@@ -136,12 +136,12 @@
             </valueSetDefinition>
         </valueSet>
     </fields>
-    <label>Business Role Assignment</label>
+    <label>Business Role Access</label>
     <nameField>
         <label>Name</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Business Role Assignments</pluralLabel>
+    <pluralLabel>Business Role Accesses</pluralLabel>
     <searchLayouts/>
     <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
