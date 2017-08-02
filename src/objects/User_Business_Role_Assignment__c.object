@@ -119,8 +119,9 @@
     </fields>
     <label>User Business Role Assignment</label>
     <nameField>
-        <label>User Business Role Assignment Name</label>
-        <type>Text</type>
+        <displayFormat>UBRA-{000000}</displayFormat>
+        <label>Name</label>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>User Business Role Assignments</pluralLabel>
     <searchLayouts/>
