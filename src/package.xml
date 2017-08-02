@@ -1,43 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>Activity__c</members>
-		<members>FamilyMember__c</members>
-		<members>UnrefusableOffer__c</members>
-		<members>MemberActivity__c</members>
-		<members>FamilyEnemy__c</members>
-		<members>AssassinationEmail__c</members>
+		<members>Business_Role__c</members>
+		<members>Business_Role_Entry__c</members>
+		<members>Business_Role_Assignment__c</members>
+		<members>User_Business_Role_Assignment__c</members>
 		<name>CustomObject</name>
 	</types>
 	<types>
-		<members>Activity__c-Activity Layout</members>
-		<members>FamilyMember__c-Family Member Layout</members>
-		<members>FamilyEnemy__c-Family Enemy Layout</members>
-		<members>UnrefusableOffer__c-UnrefusableOffer Layout</members>
-		<members>UnrefusableOffer__c-UnrefusableOffer Layout v2</members>
-		<members>MemberActivity__c-Member Activity Layout</members>
+		<members>Business_Role__c-Business Role Layout</members>
+		<members>Business_Role_Entry__c-Business Role Entry Layout</members>
+		<members>Business_Role_Assignment__c-Business Role Assignment Layout</members>
+		<members>User_Business_Role_Assignment__c-User Business Role Assignment Layout</members>
 		<name>Layout</name>
 	</types>
 	<types>
-		<members>Activity__c</members>
-		<members>FamilyMember__c</members>
-		<members>UnrefusableOffer__c</members>
-		<members>MemberActivity__c</members>
-		<members>FamilyEnemy__c</members>
-		<name>CustomTab</name>
-	</types>
-	<types>
-		<members>AssassinationTrigger</members>
-		<members>SpareLife</members>
+		<members>BusinessRoleTrigger</members>
+		<members>BusinessRoleEntryTrigger</members>
+		<members>BusinessRoleAssignmentTrigger</members>
+		<members>UserBusinessRoleAssignmentTrigger</members>
 		<name>ApexTrigger</name>
 	</types>
 	<types>
-		<members>AssassinationUtil</members>
+		<members>SObjectUtil</members>
 		<name>ApexClass</name>
-	</types>
-	<types>
-		<members>unfiled$public/CorleoneTemplate</members>
-		<name>EmailTemplate</name>
 	</types>
     <version>40.0</version>
 </Package>
