@@ -3,27 +3,31 @@
 	<types>
 		<members>Business_Role__c</members>
 		<members>Business_Role_Entry__c</members>
-		<members>Business_Role_Assignment__c</members>
+		<members>Business_Role_Access__c</members>
 		<members>User_Business_Role_Assignment__c</members>
 		<name>CustomObject</name>
 	</types>
 	<types>
 		<members>Business_Role__c-Business Role Layout</members>
 		<members>Business_Role_Entry__c-Business Role Entry Layout</members>
-		<members>Business_Role_Assignment__c-Business Role Assignment Layout</members>
+		<members>Business_Role_Access__c-Business Role Access Layout</members>
 		<members>User_Business_Role_Assignment__c-User Business Role Assignment Layout</members>
 		<name>Layout</name>
 	</types>
 	<types>
 		<members>BusinessRoleTrigger</members>
 		<members>BusinessRoleEntryTrigger</members>
-		<members>BusinessRoleAssignmentTrigger</members>
+		<members>BusinessRoleAccessTrigger</members>
 		<members>UserBusinessRoleAssignmentTrigger</members>
 		<name>ApexTrigger</name>
 	</types>
 	<types>
 		<members>SObjectUtil</members>
 		<name>ApexClass</name>
+	</types>
+	<types>
+		<members>Business_Role__c</members>
+		<name>CustomTab</name>
 	</types>
     <version>40.0</version>
 </Package>
