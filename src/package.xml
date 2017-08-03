@@ -30,7 +30,7 @@
 		<name>CustomTab</name>
 	</types>
 	<types>
-		<members>BusinessRoleDetailPage</members>
+		<members>BusinessRole</members>
 		<name>ApexPage</name>
 	</types>
     <version>40.0</version>
