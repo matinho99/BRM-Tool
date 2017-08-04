@@ -119,4 +119,12 @@
         <object>User_Business_Role_Assignment__c</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
+    <pageAccesses>
+        <apexPage>BusinessRole</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <tabSettings>
+        <tab>Business_Role__c</tab>
+        <visibility>Available</visibility>
+    </tabSettings>
 </PermissionSet>
