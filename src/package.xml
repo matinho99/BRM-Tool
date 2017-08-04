@@ -33,5 +33,10 @@
 		<members>BusinessRole</members>
 		<name>ApexPage</name>
 	</types>
+	<types>
+		<members>BRM_Admin</members>
+		<members>BRM_Viewer</members>
+		<name>PermissionSet</name>
+	</types>
     <version>40.0</version>
 </Package>
