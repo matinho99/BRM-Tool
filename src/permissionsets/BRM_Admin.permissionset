@@ -123,6 +123,10 @@
         <apexPage>BusinessRole</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
+    <pageAccesses>
+        <apexPage>BusinessRoleEdit</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
     <tabSettings>
         <tab>Business_Role__c</tab>
         <visibility>Available</visibility>

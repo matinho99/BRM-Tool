@@ -1,0 +1,16 @@
+<apex:page standardController="Business_Role__c">    
+    <apex:form >
+        <apex:pageBlock title="Business Role Edit">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save" style="align:center"/>
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Information">
+                <apex:inputField value="{!Business_Role__c.Name}"/>                
+                <apex:inputField value="{!Business_Role__c.Entry_Logic__c}"/>
+                <apex:inputField value="{!Business_Role__c.Description__c}"/>
+                <apex:inputCheckbox value="{!Business_Role__c.Is_Active__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>    
+</apex:page>
