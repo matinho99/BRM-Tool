@@ -6,10 +6,10 @@
                 <apex:commandButton action="{!cancel}" value="Cancel"/>
             </apex:pageBlockButtons>
             <apex:pageBlockSection title="Information">
-                <apex:inputField value="{!Business_Role__c.Name}"/>                
-                <apex:inputField value="{!Business_Role__c.Entry_Logic__c}"/>
-                <apex:inputField value="{!Business_Role__c.Description__c}"/>
-                <apex:inputCheckbox value="{!Business_Role__c.Is_Active__c}"/>
+                <apex:inputField value="{!Business_Role__c.Name}" label="{!$ObjectType.Business_Role__c.fields.Name.Label}"/>                
+                <apex:inputField value="{!Business_Role__c.Entry_Logic__c}" label="{!$ObjectType.Business_Role__c.fields.Entry_Logic__c.Label}"/>
+                <apex:inputField value="{!Business_Role__c.Description__c}" label="{!$ObjectType.Business_Role__c.fields.Description__c.Label}"/>
+                <apex:inputCheckbox value="{!Business_Role__c.Is_Active__c}" label="{!$ObjectType.Business_Role__c.fields.Is_Active__c.Label}"/>
             </apex:pageBlockSection>
         </apex:pageBlock>
     </apex:form>    
