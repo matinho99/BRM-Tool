@@ -78,13 +78,6 @@
             <fields>Is_Active__c</fields>
             <relatedList>Business_Role_Access__c.Business_Role__c</relatedList>
         </relatedLists>
-        <relatedLists>
-            <fields>NAME</fields>
-            <fields>User__c</fields>
-            <fields>Is_Manual__c</fields>
-            <fields>Is_Active__c</fields>
-            <relatedList>User_Business_Role_Assignment__c.Business_Role__c</relatedList>
-        </relatedLists>
     </miniLayout>
     <relatedLists>
         <excludeButtons>New</excludeButtons>
@@ -106,7 +99,13 @@
         <fields>User__c</fields>
         <fields>Is_Manual__c</fields>
         <fields>Is_Active__c</fields>
-        <relatedList>User_Business_Role_Assignment__c.Business_Role__c</relatedList>
+        <relatedList>Business_Role_Member__c.Business_Role__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <excludeButtons>New</excludeButtons>
+        <fields>NAME</fields>
+        <fields>Business_Role_Access__c</fields>
+        <relatedList>Business_Role_Member_Access__c.Business_Role__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

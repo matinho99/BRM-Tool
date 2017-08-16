@@ -4,25 +4,29 @@
 		<members>Business_Role__c</members>
 		<members>Business_Role_Entry__c</members>
 		<members>Business_Role_Access__c</members>
-		<members>User_Business_Role_Assignment__c</members>
+		<members>Business_Role_Member__c</members>
+		<members>Business_Role_Member_Access__c</members>		
 		<name>CustomObject</name>
 	</types>
 	<types>
 		<members>Business_Role__c-Business Role Layout</members>
 		<members>Business_Role_Entry__c-Business Role Entry Layout</members>
 		<members>Business_Role_Access__c-Business Role Access Layout</members>
-		<members>User_Business_Role_Assignment__c-User Business Role Assignment Layout</members>
+		<members>Business_Role_Member__c-Business Role Member Layout</members>
+		<members>Business_Role_Member_Access__c-Business Role Member Access Layout</members>
 		<name>Layout</name>
 	</types>
 	<types>
 		<members>BusinessRoleTrigger</members>
 		<members>BusinessRoleEntryTrigger</members>
 		<members>BusinessRoleAccessTrigger</members>
-		<members>UserBusinessRoleAssignmentTrigger</members>
+		<members>BusinessRoleMemberTrigger</members>
+		<members>BusinessRoleMemberAccessTrigger</members>
 		<name>ApexTrigger</name>
 	</types>
 	<types>
 		<members>SObjectUtil</members>
+		<members>BRMEngine</members>
 		<name>ApexClass</name>
 	</types>
 	<types>

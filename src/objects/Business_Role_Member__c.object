@@ -57,8 +57,8 @@
         <externalId>false</externalId>
         <label>Business Role</label>
         <referenceTo>Business_Role__c</referenceTo>
-        <relationshipLabel>User Business Role Assignments</relationshipLabel>
-        <relationshipName>User_Business_Role_Assignments</relationshipName>
+        <relationshipLabel>Business Role Members</relationshipLabel>
+        <relationshipName>Business_Role_Members</relationshipName>
         <relationshipOrder>0</relationshipOrder>
         <reparentableMasterDetail>false</reparentableMasterDetail>
         <trackTrending>false</trackTrending>
@@ -91,7 +91,7 @@
     <fields>
         <fullName>Is_Active__c</fullName>
         <defaultValue>true</defaultValue>
-        <description>Determines if BR is active for given user (manuall managed)</description>
+        <description>Determines if BR is active for given user (manually managed)</description>
         <externalId>false</externalId>
         <label>Is Active</label>
         <trackTrending>false</trackTrending>
@@ -112,18 +112,18 @@
         <externalId>false</externalId>
         <label>User</label>
         <referenceTo>User</referenceTo>
-        <relationshipName>User_Business_Role_Assignments</relationshipName>
+        <relationshipName>Business_Role_Members</relationshipName>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
-    <label>User Business Role Assignment</label>
+    <label>Business Role Member</label>
     <nameField>
-        <displayFormat>UBRA-{000000}</displayFormat>
+        <displayFormat>BRM-{000000}</displayFormat>
         <label>Name</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>User Business Role Assignments</pluralLabel>
+    <pluralLabel>Business Role Members</pluralLabel>
     <searchLayouts/>
     <sharingModel>ControlledByParent</sharingModel>
     <validationRules>
