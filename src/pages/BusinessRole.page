@@ -2,5 +2,6 @@
     <apex:detail subject="{!id}" relatedList="false" title="Business role information"/>
     <apex:relatedList list="Business_Role_Entries__r"/>
     <apex:relatedList list="Business_Role_Accesses__r"/>
-    <apex:relatedList list="User_Business_Role_Assignments__r"/>
+    <apex:relatedList list="Business_Role_Members__r"/>
+    <apex:relatedList list="Business_Role_Member_Accesses__r"/>
 </apex:page>

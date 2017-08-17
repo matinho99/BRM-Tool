@@ -8,22 +8,22 @@
         <label>Information</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Required</behavior>
+                <behavior>Readonly</behavior>
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>Business_Role__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Required</behavior>
-                <field>Type__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Is_Active__c</field>
+                <behavior>Required</behavior>
+                <field>Business_Role_Access__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Required</behavior>
+                <field>Business_Role_Member__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -59,26 +59,18 @@
     </layoutSections>
     <miniLayout>
         <fields>Name</fields>
+        <fields>Business_Role_Access__c</fields>
         <fields>Business_Role__c</fields>
-        <fields>Type__c</fields>
-        <fields>Is_Active__c</fields>
         <fields>CreatedById</fields>
         <fields>LastModifiedById</fields>
     </miniLayout>
-    <relatedLists>
-        <excludeButtons>New</excludeButtons>
-        <fields>NAME</fields>
-        <fields>Business_Role__c</fields>
-        <fields>Business_Role_Member__c.NAME</fields>
-        <relatedList>Business_Role_Member_Access__c.Business_Role_Access__c</relatedList>
-    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h0Y000003SX9k</masterLabel>
+        <masterLabel>00h0Y000003SrWc</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
