@@ -10,6 +10,10 @@ public with sharing class BRMEngine implements Queueable {
     }
  
     private void cacheAccessRecord(String accessType, Map<String, SObject> dest, List<SObject> recs, Schema.SObjectField fld) {
+        if(recs == null) {
+            return;
+        }
+        
         for(SObject r : recs) {
             String key = (accessType+ r.get(String.valueOf(fld))).toUpperCase();
             dest.put(key, r);
@@ -38,11 +42,11 @@ public with sharing class BRMEngine implements Queueable {
             }
         }
         
-        cacheAccessRecord('PermissionSet', accessRecords, [Select Id, Name from PermissionSet where Name in :permissionSetNames], PermissionSet.Name);
-        cacheAccessRecord('Queue', accessRecords, [Select Id, DeveloperName from Group where Type = 'Queue' and DeveloperName in :queueNames], Group.DeveloperName);
-        cacheAccessRecord('Group', accessRecords, [Select Id, DeveloperName from Group where Type = 'Regular' and DeveloperName in :publicGroupNames], Group.DeveloperName);
-        cacheAccessRecord('UserRole', accessRecords, [Select Id, DeveloperName from UserRole where DeveloperName in :userRoleNames], UserRole.DeveloperName);
-        cacheAccessRecord('Profile', accessRecords, [Select Id, Name from Profile where Name in :profileNames], Profile.Name);
+        cacheAccessRecord('PermissionSet', accessRecords, !permissionSetNames.isEmpty() ? [Select Id, Name from PermissionSet where Name in :permissionSetNames] : null, PermissionSet.Name);
+        cacheAccessRecord('Queue', accessRecords, !queueNames.isEmpty() ? [Select Id, DeveloperName from Group where Type = 'Queue' and DeveloperName in :queueNames] : null, Group.DeveloperName);
+        cacheAccessRecord('Group', accessRecords, !publicGroupNames.isEmpty() ? [Select Id, DeveloperName from Group where Type = 'Regular' and DeveloperName in :publicGroupNames] : null, Group.DeveloperName);
+        cacheAccessRecord('UserRole', accessRecords, !userRoleNames.isEmpty() ? [Select Id, DeveloperName from UserRole where DeveloperName in :userRoleNames] : null, UserRole.DeveloperName);
+        cacheAccessRecord('Profile', accessRecords, !profileNames.isEmpty() ? [Select Id, Name from Profile where Name in :profileNames] : null, Profile.Name);
     }
     
     private void setAssignments(Map<String, SObject> accessRecords) {
@@ -79,8 +83,6 @@ public with sharing class BRMEngine implements Queueable {
                 }
             }                
         }
-        
-        System.enqueueJob(this);
         
         insert newPermissionSetAssignments;
         insert newGroupAssignments;
