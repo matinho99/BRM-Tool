@@ -137,7 +137,7 @@
     <fields>
         <fullName>User_Id_Calc__c</fullName>
         <externalId>false</externalId>
-        <formula>Business_Role_Member__r.User__c</formula>
+        <formula>CASESAFEID(Business_Role_Member__r.User__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>User Id (formula)</label>
         <required>false</required>
