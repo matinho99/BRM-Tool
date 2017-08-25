@@ -68,7 +68,7 @@
     <fields>
         <fullName>External_ID_Calc__c</fullName>
         <externalId>false</externalId>
-        <formula>User__r.Id &amp; &apos;_&apos; &amp; Business_Role__r.Name</formula>
+        <formula>CASESAFEID(User__c) &amp; &apos;_&apos; &amp; Business_Role__r.Name</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>External ID (formula)</label>
         <required>false</required>
@@ -126,6 +126,12 @@
     <pluralLabel>Business Role Members</pluralLabel>
     <searchLayouts/>
     <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>UserNotChanged</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISCHANGED( User__c )</errorConditionFormula>
+        <errorMessage>User cannot be changed.</errorMessage>
+    </validationRules>
     <validationRules>
         <fullName>UserNotNull</fullName>
         <active>true</active>

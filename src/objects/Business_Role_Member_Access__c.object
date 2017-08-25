@@ -115,7 +115,7 @@
     <fields>
         <fullName>External_ID__c</fullName>
         <caseSensitive>false</caseSensitive>
-        <externalId>false</externalId>
+        <externalId>true</externalId>
         <label>External ID</label>
         <length>255</length>
         <required>false</required>
@@ -126,7 +126,7 @@
     <fields>
         <fullName>External_Id_Calc__c</fullName>
         <externalId>false</externalId>
-        <formula>Business_Role_Access__c &amp; &apos;_&apos; &amp; Business_Role_Member__c</formula>
+        <formula>CASESAFEID(Business_Role_Access__c) &amp; &apos;_&apos; &amp; CASESAFEID(Business_Role_Member__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>External ID (formula)</label>
         <required>false</required>

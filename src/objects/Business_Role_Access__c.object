@@ -144,5 +144,17 @@
     <pluralLabel>Business Role Accesses</pluralLabel>
     <searchLayouts/>
     <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>AccessNameNotChanged</fullName>
+        <active>true</active>
+        <errorConditionFormula>UPPER(PRIORVALUE(Name)) != UPPER(Name)</errorConditionFormula>
+        <errorMessage>Access name cannot be changed.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>AccessTypeNotChanged</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISCHANGED( Type__c )</errorConditionFormula>
+        <errorMessage>Access type cannot be changed.</errorMessage>
+    </validationRules>
     <visibility>Public</visibility>
 </CustomObject>

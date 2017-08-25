@@ -105,6 +105,7 @@
         <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>
         <fields>Business_Role_Access__c</fields>
+        <fields>Business_Role_Member__c</fields>
         <relatedList>Business_Role_Member_Access__c.Business_Role__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
