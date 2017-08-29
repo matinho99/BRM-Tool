@@ -41,45 +41,51 @@ public with sharing class BRMEngine implements Queueable {
     
     public void onUpsertAccess() {
         Set<Id> roleIds = new Set<Id>();
-        List<Business_Role_Access__c> notActiveAccessList = new List<Business_Role_Access__c>();
+        List<Business_Role_Access__c> accessForUpsertList = new List<Business_Role_Access__c>();
+        List<Business_Role_Access__c> accessForDeleteList = new List<Business_Role_Access__c>();
         memberList = new List<Business_Role_Member__c>();
         
         for(Business_Role_Access__c bra : accessList) {
-            if(!bra.Is_Active__c) {
-                notActiveAccessList.add(bra);
+            if(bra.Is_Active__c) {
+                accessForUpsertList.add(bra);
+                roleIds.add(bra.Business_Role__c);
+            } else {
+                accessForDeleteList.add(bra);
             }
-            
-            roleIds.add(bra.Business_Role__c);
         }
         
         for(Business_Role_Member__c brm : [Select Id, Business_Role__c from Business_Role_Member__c where Business_Role__c in :roleIds]) {
             memberList.add(brm);
         }
         
+        accessList = accessForUpsertList;
         upsertMemberAccess();
-        accessList = notActiveAccessList;
+        accessList = accessForDeleteList;
         onDeleteAccess();
     }
     
     public void onUpsertMember() {
         Set<Id> roleIds = new Set<Id>();
-        List<Business_Role_Member__c> notActiveMemberList = new List<Business_Role_Member__c>();
+        List<Business_Role_Member__c> memberforUpsertList = new List<Business_Role_Member__c>();
+        List<Business_Role_Member__c> memberforDeleteList = new List<Business_Role_Member__c>();
         accessList = new List<Business_Role_Access__c>();
         
         for(Business_Role_Member__c brm : memberList) {
-            if(!brm.Is_Active__c) {
-                notActiveMemberList.add(brm);
+            if(brm.Is_Active__c) {
+                memberForUpsertList.add(brm);
+                roleIds.add(brm.Business_Role__c);
+            } else {
+                memberForDeleteList.add(brm);
             }
-            
-            roleIds.add(brm.Business_Role__c);
         }
         
         for(Business_Role_Access__c bra : [Select Name, Type__c, Business_Role__c from Business_Role_Access__c where Business_Role__c in :roleIds and Is_Active__c = true]) {
         	accessList.add(bra);
         }
         
+        memberList = memberForUpsertList;
         upsertMemberAccess();
-        memberList = notActiveMemberList;
+        memberList = memberForDeleteList;
         onDeleteMember();
     }
     
@@ -109,6 +115,16 @@ public with sharing class BRMEngine implements Queueable {
         }
         
         Database.upsert(newMemberAccesses, Business_Role_Member_Access__c.External_ID__c);
+    }
+    
+    public void onDeleteAccess() {
+        List<Business_Role_Member_Access__c> maList = [Select Business_Role_Access__c from Business_Role_Member_Access__c where Business_Role_Access__c in :accessList];
+        Database.delete(maList);
+    }
+    
+    public void onDeleteMember() {
+        List<Business_Role_Member_Access__c> maList = [Select Business_Role_Member__c from Business_Role_Member_Access__c where Business_Role_Member__c in :memberList];
+        Database.delete(maList);
     }
     
     private void setUserAssignments() {
@@ -197,16 +213,6 @@ public with sharing class BRMEngine implements Queueable {
         Database.insert(newPermissionSetAssignments);
         Database.insert(newGroupAssignments);
         Database.update(users.values());
-    }
-    
-    public void onDeleteAccess() {
-        List<Business_Role_Member_Access__c> maList = [Select Business_Role_Access__c from Business_Role_Member_Access__c where Business_Role_Access__c in :accessList];
-        Database.delete(maList);
-    }
-    
-    public void onDeleteMember() {
-        List<Business_Role_Member_Access__c> maList = [Select Business_Role_Member__c from Business_Role_Member_Access__c where Business_Role_Member__c in :memberList];
-        Database.delete(maList);
     }
     
     private void deleteUserAssignments() {
