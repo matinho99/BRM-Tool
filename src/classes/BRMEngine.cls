@@ -1,16 +1,21 @@
 public with sharing class BRMEngine implements Queueable {
     private List<Business_Role_Member_Access__c> memberAccessList;
     private List<Business_Role_Member__c> memberList;
+    private List<Business_Role_Access__c> accessList;
     private String operation;
 
     public BRMEngine() {}
     
-    public BRMEngine(List<Business_Role_Member_Access__c> al) {
-        memberAccessList = al;
+    public BRMEngine(List<Business_Role_Member_Access__c> mal) {
+        memberAccessList = mal;
     }
     
     public BRMEngine(List<Business_Role_Member__c> ml) {
         memberList = ml;
+    }
+    
+    public BRMEngine(List<Business_Role_Access__c> al) {
+        accessList = al;
     }
     
     public BRMEngine(List<Business_Role_Member_Access__c> al, String op) {
@@ -34,16 +39,61 @@ public with sharing class BRMEngine implements Queueable {
         }
     }
     
-    public void setMemberAccess() {
+    public void onUpsertAccess() {
         Set<Id> roleIds = new Set<Id>();
-        Map<Id, List<Business_Role_Access__c>> roleAccessMap = new Map<Id, List<Business_Role_Access__c>>();
-        List<Business_Role_Member_Access__c> newMemberAccesses = new List<Business_Role_Member_Access__c>();
+        List<Business_Role_Access__c> accessForUpsertList = new List<Business_Role_Access__c>();
+        List<Business_Role_Access__c> accessForDeleteList = new List<Business_Role_Access__c>();
+        memberList = new List<Business_Role_Member__c>();
+        
+        for(Business_Role_Access__c bra : accessList) {
+            if(bra.Is_Active__c) {
+                accessForUpsertList.add(bra);
+                roleIds.add(bra.Business_Role__c);
+            } else {
+                accessForDeleteList.add(bra);
+            }
+        }
+        
+        for(Business_Role_Member__c brm : [Select Id, Business_Role__c from Business_Role_Member__c where Business_Role__c in :roleIds]) {
+            memberList.add(brm);
+        }
+        
+        accessList = accessForUpsertList;
+        upsertMemberAccess();
+        accessList = accessForDeleteList;
+        onDeleteAccess();
+    }
+    
+    public void onUpsertMember() {
+        Set<Id> roleIds = new Set<Id>();
+        List<Business_Role_Member__c> memberforUpsertList = new List<Business_Role_Member__c>();
+        List<Business_Role_Member__c> memberforDeleteList = new List<Business_Role_Member__c>();
+        accessList = new List<Business_Role_Access__c>();
         
         for(Business_Role_Member__c brm : memberList) {
-            roleIds.add(brm.Business_Role__c);
+            if(brm.Is_Active__c) {
+                memberForUpsertList.add(brm);
+                roleIds.add(brm.Business_Role__c);
+            } else {
+                memberForDeleteList.add(brm);
+            }
         }
         
         for(Business_Role_Access__c bra : [Select Name, Type__c, Business_Role__c from Business_Role_Access__c where Business_Role__c in :roleIds and Is_Active__c = true]) {
+        	accessList.add(bra);
+        }
+        
+        memberList = memberForUpsertList;
+        upsertMemberAccess();
+        memberList = memberForDeleteList;
+        onDeleteMember();
+    }
+    
+    private void upsertMemberAccess() {
+        Map<Id, List<Business_Role_Access__c>> roleAccessMap = new Map<Id, List<Business_Role_Access__c>>();
+        List<Business_Role_Member_Access__c> newMemberAccesses = new List<Business_Role_Member_Access__c>();
+        
+        for(Business_Role_Access__c bra : accessList) {
             if(!roleAccessMap.containsKey(bra.Business_Role__c)) {
                 roleAccessMap.put(bra.Business_Role__c, new List<Business_Role_Access__c>());
             }
@@ -58,29 +108,44 @@ public with sharing class BRMEngine implements Queueable {
                     brma.Business_Role__c = brm.Business_Role__c;
                     brma.Business_Role_Member__c = brm.Id;
                     brma.Business_Role_Access__c = bra.Id;
+                    brma.External_ID__c = bra.Id + '_' + brm.Id;
                     newMemberAccesses.add(brma);
                 }
             }
         }
         
-        insert newMemberAccesses;
-        // Database.upsert(newMemberAccesses, Business_Role_Member_Access__c.External_Id__c);
+        Database.upsert(newMemberAccesses, Business_Role_Member_Access__c.External_ID__c);
+    }
+    
+    public void onDeleteAccess() {
+        List<Business_Role_Member_Access__c> maList = [Select Business_Role_Access__c from Business_Role_Member_Access__c where Business_Role_Access__c in :accessList];
+        Database.delete(maList);
+    }
+    
+    public void onDeleteMember() {
+        List<Business_Role_Member_Access__c> maList = [Select Business_Role_Member__c from Business_Role_Member_Access__c where Business_Role_Member__c in :memberList];
+        Database.delete(maList);
     }
     
     private void setUserAssignments() {
         Map<String, SObject> accessRecords = new Map<String, SObject>();
-        getInsertData(accessRecords);
-        setAssignments(accessRecords);
+        Set<String> psAssignmentExistSet = new Set<String>();
+        Set<String> groupMemberExistSet = new Set<String>();
+        getInsertData(accessRecords, psAssignmentExistSet, groupMemberExistSet);
+        setAssignments(accessRecords, psAssignmentExistSet, groupMemberExistSet);
     }
     
-    private void getInsertData(Map<String, SObject> accessRecords) {
+    private void getInsertData(Map<String, SObject> accessRecords, Set<String> psaExist, Set<String> gmExist) {
+        Set<Id> userIds = new Set<Id>();
         Set<String> permissionSetNames = new Set<String>();
         Set<String> queueNames = new Set<String>();
         Set<String> publicGroupNames = new Set<String>();
         Set<String> userRoleNames = new Set<String>();
         Set<String> profileNames = new Set<String>();
         
-        for(Business_Role_Member_Access__c brma : memberAccessList) {                   
+        for(Business_Role_Member_Access__c brma : memberAccessList) {
+            userIds.add(brma.User_Id_Calc__c);
+            
             if(brma.Access_Type_Calc__c == 'PermissionSet') {
                 permissionSetNames.add(brma.Access_Name_Calc__c);
             } else if (brma.Access_Type_Calc__c == 'Queue') {
@@ -94,6 +159,15 @@ public with sharing class BRMEngine implements Queueable {
             }
         }
         
+        for(PermissionSetAssignment psa : [Select PermissionSet.Name, PermissionSetId, AssigneeId from PermissionSetAssignment where PermissionSet.Name in :permissionSetNames and AssigneeId in :userIds]) {
+            psaExist.add(psa.PermissionSetId+'_'+psa.AssigneeId);
+        }
+        
+        for(GroupMember gm : [Select Group.DeveloperName, GroupId, UserOrGroupId, Group.Type from GroupMember 
+                              where (Group.Type='Queue' or Group.Type='Regular') and (Group.DeveloperName in :queueNames or Group.DeveloperName in :publicGroupNames) and UserOrGroupId in :userIds]) {
+            gmExist.add(gm.GroupId+'_'+gm.UserOrGroupId);
+        }
+        
         cacheAccessRecord('PermissionSet', accessRecords, !permissionSetNames.isEmpty() ? [Select Id, Name from PermissionSet where Name in :permissionSetNames] : null, PermissionSet.Name);
         cacheAccessRecord('Queue', accessRecords, !queueNames.isEmpty() ? [Select Id, DeveloperName from Group where Type = 'Queue' and DeveloperName in :queueNames] : null, Group.DeveloperName);
         cacheAccessRecord('Group', accessRecords, !publicGroupNames.isEmpty() ? [Select Id, DeveloperName from Group where Type = 'Regular' and DeveloperName in :publicGroupNames] : null, Group.DeveloperName);
@@ -101,7 +175,7 @@ public with sharing class BRMEngine implements Queueable {
         cacheAccessRecord('Profile', accessRecords, !profileNames.isEmpty() ? [Select Id, Name from Profile where Name in :profileNames] : null, Profile.Name);
     }
     
-    private void setAssignments(Map<String, SObject> accessRecords) {
+    private void setAssignments(Map<String, SObject> accessRecords, Set<String> psaExist, Set<String> gmExist) {
         Map<Id, User> users = new Map<Id, User>();
         List<PermissionSetAssignment> newPermissionSetAssignments = new List<PermissionSetAssignment>();
         List<GroupMember> newGroupAssignments = new List<GroupMember>();
@@ -111,10 +185,10 @@ public with sharing class BRMEngine implements Queueable {
             SObject accessRec = accessRecords.get(key);
              
             if(accessRec != null) {
-                if(brma.Access_Type_Calc__c == 'PermissionSet') {
+                if(brma.Access_Type_Calc__c == 'PermissionSet' && !psaExist.contains(accessRec.Id+'_'+brma.User_Id_Calc__c)) {
                     PermissionSetAssignment psa = new PermissionSetAssignment(PermissionSetId = accessRec.Id, AssigneeId = brma.User_Id_Calc__c);
                     newPermissionSetAssignments.add(psa);
-                } else if (brma.Access_Type_Calc__c == 'Queue') {
+                } else if (brma.Access_Type_Calc__c == 'Queue' && !gmExist.contains(accessRec.Id+'_'+brma.User_Id_Calc__c)) {
                     GroupMember gm = new GroupMember(GroupId = accessRec.Id, UserOrGroupId = brma.User_Id_Calc__c);    
                     newGroupAssignments.add(gm);
                 } else if (brma.Access_Type_Calc__c == 'Group') {
@@ -136,14 +210,9 @@ public with sharing class BRMEngine implements Queueable {
             }                
         }
         
-        insert newPermissionSetAssignments;
-        insert newGroupAssignments;
-        update users.values();
-    }
-    
-    public void deleteMemberAccess() {
-        List<Business_Role_Member_Access__c> maList = [Select Business_Role_Member__c from Business_Role_Member_Access__c where Business_Role_Member__c in :memberList];
-        delete maList;
+        Database.insert(newPermissionSetAssignments);
+        Database.insert(newGroupAssignments);
+        Database.update(users.values());
     }
     
     private void deleteUserAssignments() {
@@ -225,9 +294,9 @@ public with sharing class BRMEngine implements Queueable {
             }
         }
         
-        delete oldPermissionSetAssignments;
-        delete oldGroupMembers;
-        update users.values();
+        Database.delete(oldPermissionSetAssignments);
+        Database.delete(oldGroupMembers);
+        Database.update(users.values());
     }
     
     public void execute(QueueableContext context) {
