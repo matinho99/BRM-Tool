@@ -27,6 +27,7 @@
 	<types>
 		<members>SObjectUtil</members>
 		<members>BRMEngine</members>
+		<members>BRMEngineTest</members>
 		<name>ApexClass</name>
 	</types>
 	<types>

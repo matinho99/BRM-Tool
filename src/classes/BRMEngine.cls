@@ -3,12 +3,6 @@ public with sharing class BRMEngine implements Queueable {
     private List<Business_Role_Member__c> memberList;
     private List<Business_Role_Access__c> accessList;
     private String operation;
-
-    public BRMEngine() {}
-    
-    public BRMEngine(List<Business_Role_Member_Access__c> mal) {
-        memberAccessList = mal;
-    }
     
     public BRMEngine(List<Business_Role_Member__c> ml) {
         memberList = ml;
@@ -22,19 +16,18 @@ public with sharing class BRMEngine implements Queueable {
         memberAccessList = al;
         operation = op;
     }
-    
-    public BRMEngine(List<Business_Role_Member__c> ml, String op) {
-        memberList = ml;
-        operation = op;
-    }
 
     private void cacheAccessRecord(String accessType, Map<String, SObject> dest, List<SObject> recs, Schema.SObjectField fld) {
+        if(accessType == 'Profile') {
+            System.debug(accessType + ' list is' + recs);
+        }
+        
         if(recs == null) {
             return;
         }
         
         for(SObject r : recs) {
-            String key = (accessType+ r.get(String.valueOf(fld))).toUpperCase();
+            String key = (accessType + r.get(String.valueOf(fld))).toUpperCase();
             dest.put(key, r);
         }
     }
@@ -160,12 +153,12 @@ public with sharing class BRMEngine implements Queueable {
         }
         
         for(PermissionSetAssignment psa : [Select PermissionSet.Name, PermissionSetId, AssigneeId from PermissionSetAssignment where PermissionSet.Name in :permissionSetNames and AssigneeId in :userIds]) {
-            psaExist.add(psa.PermissionSetId+'_'+psa.AssigneeId);
+            psaExist.add(psa.PermissionSetId + '_' + psa.AssigneeId);
         }
         
         for(GroupMember gm : [Select Group.DeveloperName, GroupId, UserOrGroupId, Group.Type from GroupMember 
                               where (Group.Type='Queue' or Group.Type='Regular') and (Group.DeveloperName in :queueNames or Group.DeveloperName in :publicGroupNames) and UserOrGroupId in :userIds]) {
-            gmExist.add(gm.GroupId+'_'+gm.UserOrGroupId);
+            gmExist.add(gm.GroupId + '_' + gm.UserOrGroupId);
         }
         
         cacheAccessRecord('PermissionSet', accessRecords, !permissionSetNames.isEmpty() ? [Select Id, Name from PermissionSet where Name in :permissionSetNames] : null, PermissionSet.Name);
