@@ -68,7 +68,7 @@
     <fields>
         <fullName>External_Id_Calc__c</fullName>
         <externalId>false</externalId>
-        <formula>Business_Role__r.Name &amp; &apos;&apos; &amp; TEXT(Type__c) &amp; Name</formula>
+        <formula>Name &amp; &apos;_&apos; &amp; TEXT(Type__c) &amp; &apos;_&apos; &amp; Business_Role__r.Name</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>External ID (formula)</label>
         <required>false</required>
