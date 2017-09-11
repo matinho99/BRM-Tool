@@ -1,4 +1,5 @@
-public class BRMEngineTestUtil {
+@isTest
+public class BRMTestUtil {
     public static void createUsers(List<String> userDataList) {
         List<User> testUsersList = new List<User>();
         Set<String> profileNames = new Set<String>();
@@ -182,9 +183,21 @@ public class BRMEngineTestUtil {
         }
         
         for(String s : accessDataList) {
+            String msg;
             List<String> splitList = s.split('\\|');
             String key = (splitList.get(1) + '_' + splitList.get(2) + '_' + splitList.get(3) + '_' + Boolean.valueOf(splitList.get(4))).toUpperCase();
-            System.assertEquals(Boolean.valueOf(splitList.get(0)), accessKeys.contains(key), splitList.get(5));
+            
+            if(Boolean.valueOf(splitList.get(0))) {
+                msg = '{' + splitList.get(3) + ' business role - ' + splitList.get(1) + ' of type ' + splitList.get(2) + ' access} access should exist';
+                
+                if(!Boolean.valueOf(splitList.get(3))) {
+                    msg = msg + ' and be deactivated';
+                }
+            } else {
+                msg = '{' + splitList.get(3) + ' business role - ' + splitList.get(1) + ' of type ' + splitList.get(2) + ' access} access should not exist';
+            }
+            
+            System.assertEquals(Boolean.valueOf(splitList.get(0)), accessKeys.contains(key), msg);
         }
     }
     
@@ -206,9 +219,21 @@ public class BRMEngineTestUtil {
         }
         
         for(String s : memberDataList) {
+            String msg;
             List<String> splitList = s.split('\\|');
             String key = (splitList.get(1) + '_' + splitList.get(2) + '_' + Boolean.valueOf(splitList.get(3))).toUpperCase();
-            System.assertEquals(Boolean.valueOf(splitList.get(0)), memberKeys.contains(key), splitList.get(4));
+            
+            if(Boolean.valueOf(splitList.get(0))) {
+                msg = '{' + splitList.get(2) + ' business role - ' + splitList.get(1) + ' user} member should exist';
+                
+                if(!Boolean.valueOf(splitList.get(3))) {
+                    msg = msg + ' and be deactivated';
+                }
+            } else {
+                msg = '{' + splitList.get(2) + ' business role - ' + splitList.get(1) + ' user} member should not exist';
+            }
+            
+            System.assertEquals(Boolean.valueOf(splitList.get(0)), memberKeys.contains(key), msg);
         }
     }
     
@@ -237,9 +262,17 @@ public class BRMEngineTestUtil {
         }
         
         for(String s : memberAccessDataList) {
+            String msg;
             List<String> splitList = s.split('\\|');
             String key = (splitList.get(1) + '_' + splitList.get(2) + '_' + splitList.get(3) + '_' + splitList.get(4)).toUpperCase();
-            System.assertEquals(Boolean.valueOf(splitList.get(0)), memberAccessKeys.contains(key), splitList.get(5));
+            
+            if(Boolean.valueOf(splitList.get(0))) {
+                msg = '{' + splitList.get(4) + ' business role - ' + splitList.get(3) + ' user - ' + splitList.get(2) + ' of type ' + splitList.get(1) + ' access} member access should exist';
+            } else {
+                msg = '{' + splitList.get(4) + ' business role - ' + splitList.get(3) + ' user - ' + splitList.get(2) + ' of type ' + splitList.get(1) + ' access} member access should not exist';
+            }
+            
+            System.assertEquals(Boolean.valueOf(splitList.get(0)), memberAccessKeys.contains(key), msg);
         }
     }
     
@@ -261,9 +294,17 @@ public class BRMEngineTestUtil {
         }
         
         for(String s : psDataList) {
+            String msg;
             List<String> splitList = s.split('\\|');
             String key = (splitList.get(1) + '_' + splitList.get(2)).toUpperCase();
-            System.assertEquals(Boolean.valueOf(splitList.get(0)), permissionSetKeys.contains(key), splitList.get(3));
+            
+            if(Boolean.valueOf(splitList.get(0))) {
+                msg = '{' + splitList.get(1) + ' permission set - ' + splitList.get(2) + ' user} assignment should exist';
+            } else {
+                msg = '{' + splitList.get(1) + ' permission set - ' + splitList.get(2) + ' user} assignment should not exist';
+            }
+            
+            System.assertEquals(Boolean.valueOf(splitList.get(0)), permissionSetKeys.contains(key), msg);
         }
     }
     
@@ -289,9 +330,17 @@ public class BRMEngineTestUtil {
         }
         
         for(String s : groupDataList) {
+            String msg;
             List<String> splitList = s.split('\\|');
             String key = (splitList.get(1) + '_' + splitList.get(2) + '_' + splitList.get(3)).toUpperCase();
-            System.assertEquals(Boolean.valueOf(splitList.get(0)), groupKeys.contains(key), splitList.get(4));
+            
+            if(Boolean.valueOf(splitList.get(0))) {
+                msg = '{' + splitList.get(2) + ' of type ' + splitList.get(1) + ' group - ' + splitList.get(3) + ' user} assignment should exist';
+            } else {
+                msg = '{' + splitList.get(2) + ' of type ' + splitList.get(1) + ' group - ' + splitList.get(3) + ' user} assignment should not exist';
+            }
+            
+            System.assertEquals(Boolean.valueOf(splitList.get(0)), groupKeys.contains(key), msg);
         }
     }
     
@@ -301,7 +350,7 @@ public class BRMEngineTestUtil {
         
         for(String s : userRoleDataList) {
             List<String> splitList = s.split('\\|');
-            userNames.add(splitList.get(1));
+            userNames.add(splitList.get(0));
         }
         
         for(User u : [Select Name, UserRole.DeveloperName from User where Name in :userNames]) {
@@ -310,9 +359,17 @@ public class BRMEngineTestUtil {
         }
         
         for(String s : userRoleDataList) {
+            String msg;
             List<String> splitList = s.split('\\|');
-            String key = (splitList.get(1) + '_' + splitList.get(2)).toUpperCase();
-            System.assertEquals(Boolean.valueOf(splitList.get(0)), userRoleKeys.contains(key), splitList.get(3));
+            String key = (splitList.get(0) + '_' + splitList.get(1)).toUpperCase();
+            
+            if(splitList.get(1) == 'null') {
+                msg = splitList.get(0) + ' user should have no user role';
+            } else {
+                msg = splitList.get(0) + ' user should have ' + splitList.get(1) + ' user role';
+            }
+            
+            System.assertEquals(true, userRoleKeys.contains(key), msg);
         }
     }
     
@@ -322,7 +379,7 @@ public class BRMEngineTestUtil {
         
         for(String s : profileDataList) {
             List<String> splitList = s.split('\\|');
-            userNames.add(splitList.get(1));
+            userNames.add(splitList.get(0));
         }
         
         for(User u : [Select Name, Profile.Name from User where Name in :userNames]) {
@@ -332,8 +389,9 @@ public class BRMEngineTestUtil {
         
         for(String s : profileDataList) {
             List<String> splitList = s.split('\\|');
-            String key = (splitList.get(1) + '_' + splitList.get(2)).toUpperCase();
-            System.assertEquals(Boolean.valueOf(splitList.get(0)), profileKeys.contains(key), splitList.get(3));
+            String key = (splitList.get(0) + '_' + splitList.get(1)).toUpperCase();
+            String msg = splitList.get(0) + ' user should have ' + splitList.get(1) + 'user role';
+            System.assertEquals(true, profileKeys.contains(key), msg);
         }
     }
 }
