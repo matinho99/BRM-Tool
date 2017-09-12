@@ -72,10 +72,6 @@
         <fields>Business_Role_Member__c.NAME</fields>
         <relatedList>Business_Role_Member_Access__c.Business_Role_Access__c</relatedList>
     </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Error_Log__c.Business_Role_Access__c</relatedList>
-    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>

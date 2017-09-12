@@ -70,10 +70,6 @@
         <fields>CreatedById</fields>
         <fields>LastModifiedById</fields>
     </miniLayout>
-    <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Error_Log__c.Business_Role_Member__c</relatedList>
-    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>
