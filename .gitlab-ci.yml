@@ -8,7 +8,7 @@ validate_ci:
   stage: test
   script:
     - echo "APTTUS Feature branch - validate with all tests"
-    - ant validate -Dsfdc.maxPoll=500 -Dsfdc.deployRoot=src -Dsfdc.username=$SF_CI_USERNAME -Dsfdc.password=$SF_CI_PASSWORD -Dsfdc.serverurl=$SF_TEST_SERVERURL
+    - ant validateWithAllTests -Dsfdc.maxPoll=500 -Dsfdc.deployRoot=src -Dsfdc.username=$SF_CI_USERNAME -Dsfdc.password=$SF_CI_PASSWORD -Dsfdc.serverurl=$SF_TEST_SERVERURL
   only:
     - /^feature\/.*$/
 
@@ -24,7 +24,7 @@ validate_preprod:
   stage: test
   script:
     - echo "APTTUS Hotfix branch - validate with all tests"
-    - ant validate -Dsfdc.maxPoll=500 -Dsfdc.deployRoot=src -Dsfdc.username=$SF_PREPROD_USERNAME -Dsfdc.password=$SF_PREPROD_PASSWORD -Dsfdc.serverurl=$SF_TEST_SERVERURL
+    - ant validateWithAllTests -Dsfdc.maxPoll=500 -Dsfdc.deployRoot=src -Dsfdc.username=$SF_PREPROD_USERNAME -Dsfdc.password=$SF_PREPROD_PASSWORD -Dsfdc.serverurl=$SF_TEST_SERVERURL
   only:
     - /^hotfix\/.*$/
 
