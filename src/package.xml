@@ -5,7 +5,8 @@
 		<members>Business_Role_Entry__c</members>
 		<members>Business_Role_Access__c</members>
 		<members>Business_Role_Member__c</members>
-		<members>Business_Role_Member_Access__c</members>		
+		<members>Business_Role_Member_Access__c</members>
+		<members>Error_Log__c</members>		
 		<name>CustomObject</name>
 	</types>
 	<types>
@@ -14,6 +15,7 @@
 		<members>Business_Role_Access__c-Business Role Access Layout</members>
 		<members>Business_Role_Member__c-Business Role Member Layout</members>
 		<members>Business_Role_Member_Access__c-Business Role Member Access Layout</members>
+		<members>Error_Log__c-Error Log Layout</members>
 		<name>Layout</name>
 	</types>
 	<types>
@@ -29,6 +31,8 @@
 		<members>BRMEngine</members>
 		<members>BRMEngineTest</members>
 		<members>BRMTestUtil</members>
+		<members>LogUtil</members>
+		<members>DMLResult</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
