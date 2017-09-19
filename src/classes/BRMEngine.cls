@@ -172,6 +172,7 @@ public with sharing class BRMEngine implements Queueable {
         Map<Id, User> users = new Map<Id, User>();
         List<PermissionSetAssignment> newPermissionSetAssignments = new List<PermissionSetAssignment>();
         List<GroupMember> newGroupMembers = new List<GroupMember>();
+        List<Error_Log__c> newErrorLogs = new List<Error_Log__c>();
         List<Business_Role_Member_Access__c> memberAccessForPS = new List<Business_Role_Member_Access__c>();
         List<Business_Role_Member_Access__c> memberAccessForGM = new List<Business_Role_Member_Access__c>();
         List<Business_Role_Member_Access__c> memberAccessForUsers = new List<Business_Role_Member_Access__c>();
@@ -208,13 +209,19 @@ public with sharing class BRMEngine implements Queueable {
                     users.get(brma.User_Id_Calc__c).ProfileId = accessRec.Id;
                     memberAccessForUsers.add(brma);
                 }
-            }                
+            } else {
+                newErrorLogs.add(new Error_Log__c(Business_Role__c = brma.Business_Role__c, 
+                                                  Business_Role_Access__c = brma.Business_Role_Access__c, 
+                                                  Business_Role_Member__c = brma.Business_Role_Member__c, 
+                                                  Description__c = brma.Access_Type_Calc__c + ' does not exist'));
+            }
         }
         
         new LogUtil().
             addResults(memberAccessForPS, Database.insert(newPermissionSetAssignments, false)).
             addResults(memberAccessForGM, Database.insert(newGroupMembers, false)).
             addResults(memberAccessForUsers, Database.update(users.values(), false)).
+            addErrorLogs(newErrorLogs).
             insertErrorLog();
     }
     
