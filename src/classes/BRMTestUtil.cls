@@ -1,5 +1,5 @@
 @isTest
-public class BRMTestUtil {
+public with sharing class BRMTestUtil {
     public static void createUsers(List<String> userDataList) {
         List<User> testUsersList = new List<User>();
         Set<String> profileNames = new Set<String>();

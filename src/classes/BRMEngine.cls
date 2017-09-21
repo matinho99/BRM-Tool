@@ -107,17 +107,19 @@ public with sharing class BRMEngine implements Queueable {
             }
         }
         
-        new LogUtil().addResults(newMemberAccesses, Database.upsert(newMemberAccesses, Business_Role_Member_Access__c.External_ID__c, false)).insertErrorLog();
+        new BRMLogUtil().addResults(newMemberAccesses, Database.upsert(newMemberAccesses, Business_Role_Member_Access__c.External_ID__c, false)).setupErrorLogs();
     }
     
     public void onDeleteAccess() {
-        List<Business_Role_Member_Access__c> maList = [Select Business_Role_Access__c from Business_Role_Member_Access__c where Business_Role_Access__c in :accessList];
-        new LogUtil().addResults(maList, Database.delete(maList, false)).insertErrorLog();
+        List<Business_Role_Member_Access__c> maList = [Select Business_Role__c, Business_Role_Access__c, Business_Role_Member__c from Business_Role_Member_Access__c 
+                                                       where Business_Role_Access__c in :accessList];
+        new BRMLogUtil().addResults(maList, Database.delete(maList, false)).setupErrorLogs();
     }
     
     public void onDeleteMember() {
-        List<Business_Role_Member_Access__c> maList = [Select Business_Role_Member__c from Business_Role_Member_Access__c where Business_Role_Member__c in :memberList];
-        new LogUtil().addResults(maList, Database.delete(maList, false)).insertErrorLog();
+        List<Business_Role_Member_Access__c> maList = [Select Business_Role__c, Business_Role_Access__c, Business_Role_Member__c from Business_Role_Member_Access__c 
+                                                       where Business_Role_Member__c in :memberList];
+        new BRMLogUtil().addResults(maList, Database.delete(maList, false)).setupErrorLogs();
     }
     
     private void setUserAssignments() {
@@ -213,16 +215,16 @@ public with sharing class BRMEngine implements Queueable {
                 newErrorLogs.add(new Error_Log__c(Business_Role__c = brma.Business_Role__c, 
                                                   Business_Role_Access__c = brma.Business_Role_Access__c, 
                                                   Business_Role_Member__c = brma.Business_Role_Member__c, 
-                                                  Description__c = brma.Access_Type_Calc__c + ' does not exist'));
+                                                  Description__c = brma.Access_Name_Calc__c + ' ' + brma.Access_Type_Calc__c + ' does not exist'));
             }
         }
         
-        new LogUtil().
+        new BRMLogUtil().
             addResults(memberAccessForPS, Database.insert(newPermissionSetAssignments, false)).
             addResults(memberAccessForGM, Database.insert(newGroupMembers, false)).
             addResults(memberAccessForUsers, Database.update(users.values(), false)).
             addErrorLogs(newErrorLogs).
-            insertErrorLog();
+            setupErrorLogs();
     }
     
     private void deleteUserAssignments() {
@@ -307,11 +309,11 @@ public with sharing class BRMEngine implements Queueable {
             }
         }
         
-        new LogUtil().
+        new BRMLogUtil().
             addResults(memberAccessForPS, Database.delete(oldPermissionSetAssignments, false)).
             addResults(memberAccessForGM, Database.delete(oldGroupMembers, false)).
             addResults(memberAccessForUsers, Database.update(users.values(), false)).
-            insertErrorLog();
+            setupErrorLogs();
     }
     
     public void execute(QueueableContext context) {
