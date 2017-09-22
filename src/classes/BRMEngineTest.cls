@@ -123,7 +123,7 @@ private class BRMEngineTest {
             });
             Test.stopTest();
             
-            System.assertEquals(6, [Select Id, Business_Role__r.Name from Business_Role_Access__c where Business_Role__r.Name = 'Test Admin'].size(), 
+            System.assertEquals(5, [Select Id, Business_Role__r.Name from Business_Role_Access__c where Business_Role__r.Name = 'Test Admin'].size(), 
                                 'Invalid number of Test Admin accesses');
             BRMTestUtil.assertAccesses(new List<String> {
                 'true|BRM_Admin|PermissionSet|Test Admin|true', 
