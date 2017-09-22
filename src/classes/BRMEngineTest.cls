@@ -119,8 +119,7 @@ private class BRMEngineTest {
                 'BRMTestAdminGroup|Group|Test Admin'
             });
             BRMTestUtil.createAccesses(new List<String> {
-                'BRM_Admin|PermissionSet|Test Admin', 
-                'Chatter Free User|Profile|Test Admin'
+                'BRM_Admin|PermissionSet|Test Admin'
             });
             Test.stopTest();
             
@@ -128,15 +127,13 @@ private class BRMEngineTest {
                                 'Invalid number of Test Admin accesses');
             BRMTestUtil.assertAccesses(new List<String> {
                 'true|BRM_Admin|PermissionSet|Test Admin|true', 
-                'true|Chatter Free User|Profile|Test Admin|true', 
                 'false|Test_Admin_PS|PermissionSet|Test Admin|true', 
                 'false|Test_Fake_PS|PermissionSet|Test Admin|true', 
                 'false|BRMTestAdminGroup|Group|Test Admin|true'
             });
             
             BRMTestUtil.assertMemberAccesses(new List<String> {
-                'true|PermissionSet|BRM_Admin|Test One|Test Admin', 
-                'true|Profile|Chatter Free User|Test One|Test Admin', 
+                'true|PermissionSet|BRM_Admin|Test One|Test Admin',  
                 'false|PermissionSet|Test_Admin_PS|Test One|Test Admin', 
                 'false|PermissionSet|Test_Fake_PS|Test One|Test Admin', 
                 'false|Group|BRMTestAdminGroup|Test One|Test Admin'
@@ -149,10 +146,6 @@ private class BRMEngineTest {
             
             BRMTestUtil.assertGroups(new List<String> {
                 'false|Regular|BRMTestAdminGroup|Test One'
-            });
-            
-            BRMTestUtil.assertProfiles(new List<String> {
-                'Test One|Standard Platform User'
             });
         }
     }

@@ -32,6 +32,7 @@
 		<members>BRMEngineTest</members>
 		<members>BRMTestUtil</members>
 		<members>BRMLogUtil</members>
+		<members>BRMLogUtilTest</members>
 		<members>DMLResult</members>
 		<name>ApexClass</name>
 	</types>
