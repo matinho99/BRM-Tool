@@ -30,7 +30,7 @@ public with sharing class BRMLogUtil implements Queueable {
                                                    Business_Role_Member__c = operationRecords.get(i).Business_Role_Member__c);
                 
                 for(DMLResult.Error e : r.getErrors()) {
-                    el.Description__c = (el.Description__c == null ? '' : el.Description__c) + e.getStatusCode() + ': ' + e.getMessage() + '\r\n'; 
+                    el.Description__c = (el.Description__c == null ? '' : el.Description__c + '\n') + e.getStatusCode() + ': ' + e.getMessage(); 
                 }
                 
                 newErrorLogs.add(el);
