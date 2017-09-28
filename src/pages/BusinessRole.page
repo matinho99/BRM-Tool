@@ -4,4 +4,5 @@
     <apex:relatedList list="Business_Role_Accesses__r"/>
     <apex:relatedList list="Business_Role_Members__r"/>
     <apex:relatedList list="Business_Role_Member_Accesses__r"/>
+    <apex:relatedList list="Error_Logs__r"/>
 </apex:page>

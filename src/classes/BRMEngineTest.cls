@@ -133,7 +133,7 @@ private class BRMEngineTest {
             });
             
             BRMTestUtil.assertMemberAccesses(new List<String> {
-                'true|PermissionSet|BRM_Admin|Test One|Test Admin', 
+                'true|PermissionSet|BRM_Admin|Test One|Test Admin',  
                 'false|PermissionSet|Test_Admin_PS|Test One|Test Admin', 
                 'false|PermissionSet|Test_Fake_PS|Test One|Test Admin', 
                 'false|Group|BRMTestAdminGroup|Test One|Test Admin'

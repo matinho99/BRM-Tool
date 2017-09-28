@@ -70,6 +70,14 @@
         <fields>CreatedById</fields>
         <fields>LastModifiedById</fields>
     </miniLayout>
+    <relatedLists>
+        <excludeButtons>New</excludeButtons>
+        <fields>NAME</fields>
+        <fields>Business_Role__c</fields>
+        <fields>Business_Role_Access__c</fields>
+        <fields>Description__c</fields>
+        <relatedList>Error_Log__c.Business_Role_Member__c</relatedList>
+    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>
