@@ -174,6 +174,7 @@ public with sharing class BRMEngine implements Queueable {
         Map<Id, User> users = new Map<Id, User>();
         List<PermissionSetAssignment> newPermissionSetAssignments = new List<PermissionSetAssignment>();
         List<GroupMember> newGroupMembers = new List<GroupMember>();
+<<<<<<< HEAD
         List<User> usersWithRoleUpdate = new List<User>();
         List<User> usersWithProfileUpdate = new List<User>();
         List<Error_Log__c> newErrorLogs = new List<Error_Log__c>();
@@ -181,6 +182,12 @@ public with sharing class BRMEngine implements Queueable {
         List<Business_Role_Member_Access__c> memberAccessForGM = new List<Business_Role_Member_Access__c>();
         List<Business_Role_Member_Access__c> memberAccessForUsersWithRoleUpdate = new List<Business_Role_Member_Access__c>();
         List<Business_Role_Member_Access__c> memberAccessForUsersWithProfileUpdate = new List<Business_Role_Member_Access__c>();
+=======
+        List<Error_Log__c> newErrorLogs = new List<Error_Log__c>();
+        List<Business_Role_Member_Access__c> memberAccessForPS = new List<Business_Role_Member_Access__c>();
+        List<Business_Role_Member_Access__c> memberAccessForGM = new List<Business_Role_Member_Access__c>();
+        List<Business_Role_Member_Access__c> memberAccessForUsers = new List<Business_Role_Member_Access__c>();
+>>>>>>> 93568bec6f3c5790fd92e200fd1a432d3c2db0eb
         
         for(Business_Role_Member_Access__c brma : memberAccessList) {
             String key = (brma.Access_Type_Calc__c + brma.Access_Name_Calc__c).toUpperCase();
@@ -205,16 +212,24 @@ public with sharing class BRMEngine implements Queueable {
                     }
                     
                     users.get(brma.User_Id_Calc__c).UserRoleId = accessRec.Id;
+<<<<<<< HEAD
                     usersWithRoleUpdate.add(users.get(brma.User_Id_Calc__c));
                     memberAccessForUsersWithRoleUpdate.add(brma);
+=======
+                    memberAccessForUsers.add(brma);
+>>>>>>> 93568bec6f3c5790fd92e200fd1a432d3c2db0eb
                 } else if (brma.Access_Type_Calc__c == 'Profile') {
                     if(!users.containsKey(brma.User_Id_Calc__c)) {
                         users.put(brma.User_Id_Calc__c, new User(Id = brma.User_Id_Calc__c));
                     }
                     
                     users.get(brma.User_Id_Calc__c).ProfileId = accessRec.Id;
+<<<<<<< HEAD
                     usersWithProfileUpdate.add(users.get(brma.User_Id_Calc__c));
                     memberAccessForUsersWithProfileUpdate.add(brma);
+=======
+                    memberAccessForUsers.add(brma);
+>>>>>>> 93568bec6f3c5790fd92e200fd1a432d3c2db0eb
                 }
             } else {
                 newErrorLogs.add(new Error_Log__c(Business_Role__c = brma.Business_Role__c, 
@@ -227,8 +242,12 @@ public with sharing class BRMEngine implements Queueable {
         new BRMLogUtil().
             addResults(memberAccessForPS, Database.insert(newPermissionSetAssignments, false)).
             addResults(memberAccessForGM, Database.insert(newGroupMembers, false)).
+<<<<<<< HEAD
             addResults(memberAccessForUsersWithRoleUpdate, Database.update(usersWithRoleUpdate, false)).
             addResults(memberAccessForUsersWithProfileUpdate, Database.update(usersWithProfileUpdate, false)).
+=======
+            addResults(memberAccessForUsers, Database.update(users.values(), false)).
+>>>>>>> 93568bec6f3c5790fd92e200fd1a432d3c2db0eb
             addErrorLogs(newErrorLogs).
             setupErrorLogs();
     }
