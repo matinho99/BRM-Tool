@@ -72,6 +72,14 @@
         <fields>Business_Role_Member__c.NAME</fields>
         <relatedList>Business_Role_Member_Access__c.Business_Role_Access__c</relatedList>
     </relatedLists>
+    <relatedLists>
+        <excludeButtons>New</excludeButtons>
+        <fields>NAME</fields>
+        <fields>Business_Role__c</fields>
+        <fields>Business_Role_Member__c</fields>
+        <fields>Description__c</fields>
+        <relatedList>Error_Log__c.Business_Role_Access__c</relatedList>
+    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>

@@ -1,5 +1,5 @@
 @isTest
-public class BRMTestUtil {
+public with sharing class BRMTestUtil {
     public static void createUsers(List<String> userDataList) {
         List<User> testUsersList = new List<User>();
         Set<String> profileNames = new Set<String>();
@@ -392,6 +392,52 @@ public class BRMTestUtil {
             String key = (splitList.get(0) + '_' + splitList.get(1)).toUpperCase();
             String msg = splitList.get(0) + ' user should have ' + splitList.get(1) + 'user role';
             System.assertEquals(true, profileKeys.contains(key), msg);
+        }
+    }
+    
+    public static void assertErrorLogs(List<String> errorLogDataList) {
+        Set<String> roleNames = new Set<String>();
+        Set<String> accessNames = new Set<String>();
+        Set<String> accessTypes = new Set<String>();
+        Set<String> userNames = new Set<String>();
+        Map<Id, String> userMap = new Map<Id, String>();
+        Set<String> errorLogKeys = new Set<String>();
+        
+        for(String s : errorLogDataList) {
+            List<String> splitList = s.split('\\|');
+            roleNames.add(splitList.get(1));
+            accessNames.add(splitList.get(2) != 'null' ? splitList.get(2) : '');
+            accessTypes.add(splitList.get(3) != 'null' ? splitList.get(3) : '');
+            userNames.add(splitList.get(4));
+            
+            if(!userMap.containsKey(null) && splitList.get(4) == 'null') {
+                userMap.put(null, null);
+            }
+        }
+        
+        for(User u : [Select Id, Name from User where Name in :userNames]) {
+            userMap.put(u.Id, u.Name);
+        }
+        
+        for(Error_Log__c el : [Select Business_Role__r.Name, Business_Role_Access__r.Name, Business_Role_Access__r.Type__c, Business_Role_Member__r.User__c from Error_Log__c 
+                              where Business_Role__r.Name in :roleNames and Business_Role_Access__r.Name in :accessNames and Business_Role_Access__r.Type__c in :accessTypes 
+                              and Business_Role_Member__r.User__c in :userMap.keySet()]) {
+            String key = (el.Business_Role__r.Name + '_' + el.Business_Role_Access__r.Name + '_' + el.Business_Role_Access__r.Type__c + '_' + userMap.get(el.Business_Role_Member__r.User__c)).toUpperCase();
+            errorLogKeys.add(key);
+        }
+        
+        for(String s : errorLogDataList) {
+            String msg;
+            List<String> splitList = s.split('\\|');
+            String key = (splitList.get(1) + '_' + splitList.get(2) + '_' + splitList.get(3) + '_' + splitList.get(4)).toUpperCase();
+            
+            if(Boolean.valueOf(splitList.get(0))) {
+                msg = '{' + splitList.get(1) + ' business role - ' + splitList.get(2) + ' of type ' + splitList.get(3) + ' access - ' + splitList.get(4) + ' member} error log should exist';
+            } else {
+                msg = '{' + splitList.get(1) + ' business role - ' + splitList.get(2) + ' of type ' + splitList.get(3) + ' access - ' + splitList.get(4) + ' member} error log should not exist';
+            }
+            
+            System.assertEquals(Boolean.valueOf(splitList.get(0)), errorLogKeys.contains(key), msg);
         }
     }
 }
