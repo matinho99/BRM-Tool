@@ -68,4 +68,4 @@ Business Role Management automates Salesforce User Access to Salesforce Platform
 This tool’s main goal is simplification of company employees’ registration process. Normally, an administrator has to assign user roles, permission sets, groups etc. separately for each user making this work time-consuming. This tool allows an administrator to create a business role which bounds all of these accesses. Having created such role, all an administrator has to do is to make a connection between  a business role and a user. From this moment, user has all the accesses that were previously linked to this business role and is ready to go.
 
 ## How does it work?
-Check this short demo: https://www.youtube.com/watch?v=b5Q93LU8ASw&feature=youtu.be
+Check this short demo: https://youtu.be/b5Q93LU8ASw
