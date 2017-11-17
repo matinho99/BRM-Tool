@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>AutoAssignmentCtrl</members>
         <members>BRMEngine</members>
         <members>BRMEngineTest</members>
         <members>BRMLogUtil</members>
@@ -11,6 +12,7 @@
         <name>ApexClass</name>
     </types>
     <types>
+        <members>AutoAssignment</members>
         <members>BusinessRole</members>
         <members>BusinessRoleEdit</members>
         <name>ApexPage</name>

@@ -18,9 +18,8 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>Edit</actionName>
-        <content>BusinessRoleEdit</content>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
-        <type>Visualforce</type>
+        <type>Default</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>List</actionName>
@@ -28,9 +27,8 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>New</actionName>
-        <content>BusinessRoleEdit</content>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
-        <type>Visualforce</type>
+        <type>Default</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>SaveEdit</actionName>
@@ -42,9 +40,8 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
-        <content>BusinessRole</content>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
-        <type>Visualforce</type>
+        <type>Default</type>
     </actionOverrides>
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>

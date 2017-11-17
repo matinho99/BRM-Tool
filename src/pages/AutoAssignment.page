@@ -1,0 +1,110 @@
+<apex:page standardController="Business_Role__c" extensions="AutoAssignmentCtrl" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="true">
+  <apex:slds />
+  <div class="slds-scope">
+    <div class="slds-table_edit_container slds-is-relative">
+      <table class="slds-table slds-table_bordered slds-table_resizable-cols slds-table_fixed-layout slds-no-cell-focus slds-table_edit" role="grid">
+        <thead>
+          <tr class="slds-line-height_reset">
+            <th scope="col" style="width: 2rem;">
+              <div class="slds-th__action">
+                <span class="slds-assistive-text">Errors</span>
+              </div>
+            </th>
+            <th scope="col" style="width: 2rem;">
+              <div class="slds-th__action">
+                <span class="slds-assistive-text">Actions</span>
+              </div>
+            </th>
+            <th aria-sort="none" class="slds-is-resizable slds-text-title_caps" aria-label="Field" scope="col" style="width: 8.75rem;">
+              <span class="slds-truncate" title="Field">Field</span>
+            </th>
+            <th aria-sort="none" class="slds-is-resizable slds-text-title_caps" aria-label="Operator" scope="col" style="width: 8.75rem;">
+              <span class="slds-truncate" title="Operator">Operator</span>
+            </th>
+            <th aria-sort="none" class="slds-is-sortable slds-is-resizable slds-text-title_caps" aria-label="Value" scope="col" style="width: 8.75rem;">
+              <span class="slds-truncate" title="Value">Value</span>
+            </th>
+            <th scope="col" style="width: 3.25rem;">
+              <div class="slds-th__action">
+                <span class="slds-assistive-text">Actions</span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="slds-hint-parent">
+            <td class="slds-cell-error slds-cell-edit" role="gridcell">
+              <button class="slds-button slds-button_icon slds-button_icon-error slds-m-horizontal_xxx-small slds-hidden" aria-hidden="true" id="error-01" tabindex="-1" title="Item 1 has errors">
+                <svg class="slds-button__icon" aria-hidden="true">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#warning')}" />
+                </svg>
+                <span class="slds-assistive-text">Item 1 has errors</span>
+              </button>
+              <span class="slds-row-number slds-text-body_small slds-text-color_weak"></span>
+            </td>
+            <td class="slds-cell-edit" role="gridcell">
+              <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small" tabindex="-1" title="Move Up">
+                <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_small" aria-hidden="true">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#up')}" />
+                </svg>
+                <span class="slds-assistive-text">Move Up</span>
+              </button>
+              <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small" tabindex="-1" title="Move Down">
+                <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_small" aria-hidden="true">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#down')}" />
+                </svg>
+                <span class="slds-assistive-text">Move Down</span>
+              </button>
+            </td>
+            <th class="slds-cell-edit" scope="row" tabindex="0">
+              <span class="slds-grid slds-grid_align-spread"><a href="javascript:void(0);" class="slds-truncate" id="link-01" tabindex="-1" title="Department">Department</a>
+                <button class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="-1" title="Edit Name: Item 1">
+                  <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_edit" aria-hidden="true">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#edit')}" />
+                  </svg>
+                  <span class="slds-assistive-text">Edit Field: Department</span>
+                </button>
+              </span>
+            </th>
+            <td class="slds-cell-edit" role="gridcell">
+              <span class="slds-grid slds-grid_align-spread">
+                <span class="slds-truncate" title="equals">equals</span>
+                <button class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="-1" title="Edit Account Name: Item 1">
+                  <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_edit" aria-hidden="true">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#edit')}" />
+                  </svg>
+                  <span class="slds-assistive-text">Edit Operator: equals</span>
+                </button>
+              </span>
+            </td>
+            <td class="slds-cell-edit" role="gridcell">
+              <span class="slds-grid slds-grid_align-spread">
+                <span class="slds-truncate" title="4/10/15">San Francisco</span>
+                <button class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="-1" title="Edit Value: San Francisco">
+                  <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_edit" aria-hidden="true">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#edit')}" />
+                  </svg>
+                  <span class="slds-assistive-text">Edit Value: San Francisco</span>
+                </button>
+              </span>
+            </td>
+            <td class="slds-cell-edit" role="gridcell">
+              <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small" tabindex="-1" title="Remove">
+                <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_small" aria-hidden="true">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#delete')}" />
+                </svg>
+                <span class="slds-assistive-text">Remove</span>
+              </button>
+              <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small" tabindex="-1" title="Add">
+                <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_small" aria-hidden="true">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#new')}" />
+                </svg>
+                <span class="slds-assistive-text">Add</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</apex:page>

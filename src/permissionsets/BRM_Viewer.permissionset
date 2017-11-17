@@ -191,6 +191,10 @@
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <pageAccesses>
+        <apexPage>AutoAssignment</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>BusinessRole</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
