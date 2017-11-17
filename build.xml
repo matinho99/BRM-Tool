@@ -19,7 +19,7 @@
     </target>
 
     <target name="retrieveAllInPlace">
-        <sf:retrieve username="${sfdc.username}" password="${sfdc.password}" serverurl="${sfdc.serverurl}" maxPoll="${sfdc.maxPoll}" trace="${sfdc.trace}" logType="${sfdc.logType}" retrieveTarget="${sfdc.deployRoot}" unpackaged="${sfdc.deployRoot}/package.xml" ignoreWarnings="false"/>
+        <sf:retrieve username="${sfdc.username}" password="${sfdc.password}" serverurl="${sfdc.serverurl}" maxPoll="${sfdc.maxPoll}" trace="${sfdc.trace}" retrieveTarget="${sfdc.deployRoot}" unpackaged="${sfdc.deployRoot}/package.xml"/>
     </target>
 
     <target name="undeploy">

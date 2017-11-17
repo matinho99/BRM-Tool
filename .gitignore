@@ -9,3 +9,4 @@ build.properties
 Referenced Packages/
 dep.bat
 *.orig
+retrieve*.log
