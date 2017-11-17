@@ -1,0 +1,1 @@
+ant retrieveAllInPlace > retrieve.log 2>&1

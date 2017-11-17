@@ -1,8 +1,10 @@
 .project
 .settings/com.salesforce.ide.core.prefs
 salesforce.schema
-logs/validate_*.log
-logs/deploy_*.log
+logs/validate*.log
+logs/deploy*.log
+validate*.log
+deploy*.log
 build.properties
 Referenced Packages/
 dep.bat
