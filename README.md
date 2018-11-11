@@ -71,5 +71,5 @@ This tool’s main goal is simplification of company employees’ registration p
 Check this short demo: https://youtu.be/b5Q93LU8ASw
 
 ## Authors
--Bartosz Osowiecki
--Mateusz Osowiecki
+- Bartosz Osowiecki
+- Mateusz Osowiecki
