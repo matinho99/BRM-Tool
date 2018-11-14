@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities>
+        <application>BRM_Classic</application>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>BRM_Lightning</application>
+        <visible>true</visible>
+    </applicationVisibilities>
     <description>Read-only access to BRM objects</description>
     <fieldPermissions>
         <editable>false</editable>

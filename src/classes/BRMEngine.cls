@@ -47,7 +47,7 @@ public with sharing class BRMEngine implements Queueable {
             }
         }
         
-        for(Business_Role_Member__c brm : [Select Id, Business_Role__c from Business_Role_Member__c where Business_Role__c in :roleIds]) {
+        for(Business_Role_Member__c brm : [Select Id, Business_Role__c from Business_Role_Member__c where Business_Role__c in :roleIds and Is_Active__c = true]) {
             memberList.add(brm);
         }
         

@@ -1,54 +1,59 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-	<types>
-		<members>Business_Role__c</members>
-		<members>Business_Role_Entry__c</members>
-		<members>Business_Role_Access__c</members>
-		<members>Business_Role_Member__c</members>
-		<members>Business_Role_Member_Access__c</members>
-		<members>Error_Log__c</members>		
-		<name>CustomObject</name>
-	</types>
-	<types>
-		<members>Business_Role__c-Business Role Layout</members>
-		<members>Business_Role_Entry__c-Business Role Entry Layout</members>
-		<members>Business_Role_Access__c-Business Role Access Layout</members>
-		<members>Business_Role_Member__c-Business Role Member Layout</members>
-		<members>Business_Role_Member_Access__c-Business Role Member Access Layout</members>
-		<members>Error_Log__c-Error Log Layout</members>
-		<name>Layout</name>
-	</types>
-	<types>
-		<members>BusinessRoleTrigger</members>
-		<members>BusinessRoleEntryTrigger</members>
-		<members>BusinessRoleAccessTrigger</members>
-		<members>BusinessRoleMemberTrigger</members>
-		<members>BusinessRoleMemberAccessTrigger</members>
-		<name>ApexTrigger</name>
-	</types>
-	<types>
-		<members>SObjectUtil</members>
-		<members>BRMEngine</members>
-		<members>BRMEngineTest</members>
-		<members>BRMTestUtil</members>
-		<members>BRMLogUtil</members>
-		<members>BRMLogUtilTest</members>
-		<members>DMLResult</members>
-		<name>ApexClass</name>
-	</types>
-	<types>
-		<members>Business_Role__c</members>
-		<name>CustomTab</name>
-	</types>
-	<types>
-		<members>BusinessRole</members>
-		<members>BusinessRoleEdit</members>
-		<name>ApexPage</name>
-	</types>
-	<types>
-		<members>BRM_Admin</members>
-		<members>BRM_Viewer</members>
-		<name>PermissionSet</name>
-	</types>
-    <version>40.0</version>
+    <types>
+        <members>BRMEngine</members>
+        <members>BRMEngineTest</members>
+        <members>BRMLogUtil</members>
+        <members>BRMLogUtilTest</members>
+        <members>BRMTestUtil</members>
+        <members>DMLResult</members>
+        <members>SObjectUtil</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>BusinessRole</members>
+        <members>BusinessRoleEdit</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>BusinessRoleAccessTrigger</members>
+        <members>BusinessRoleEntryTrigger</members>
+        <members>BusinessRoleMemberAccessTrigger</members>
+        <members>BusinessRoleMemberTrigger</members>
+        <members>BusinessRoleTrigger</members>
+        <name>ApexTrigger</name>
+    </types>
+    <types>
+        <members>BRM_Classic</members>
+        <members>BRM_Lightning</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>Business_Role_Access__c</members>
+        <members>Business_Role_Entry__c</members>
+        <members>Business_Role_Member_Access__c</members>
+        <members>Business_Role_Member__c</members>
+        <members>Business_Role__c</members>
+        <members>Error_Log__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>Business_Role__c</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Business_Role_Access__c-Business Role Access Layout</members>
+        <members>Business_Role_Entry__c-Business Role Entry Layout</members>
+        <members>Business_Role_Member_Access__c-Business Role Member Access Layout</members>
+        <members>Business_Role_Member__c-Business Role Member Layout</members>
+        <members>Business_Role__c-Business Role Layout</members>
+        <members>Error_Log__c-Error Log Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>BRM_Admin</members>
+        <members>BRM_Viewer</members>
+        <name>PermissionSet</name>
+    </types>
+    <version>41.0</version>
 </Package>
